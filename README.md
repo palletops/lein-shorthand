@@ -7,7 +7,7 @@ In the repl, there are functions that you always want to have handy,
 no matter which namespace you are in.  One way of achieving this is to
 put these functions into a namespace with a short name, like `.`, so
 you can refer to them easily.  The original idea came from Gary
-Frederick, who also wrote [dot-slash][dot-slash], which I discovered
+Fredericks, who also wrote [dot-slash][dot-slash], which I discovered
 after writing this.
 
 ## Usage
@@ -52,4 +52,4 @@ Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
 
 
-[dot-slash]:https://github.com/gfredericks/dot-slash "Gary Frederick's dot-slash plugin"
+[dot-slash]:https://github.com/gfredericks/dot-slash "Gary Fredericks' dot-slash plugin"
