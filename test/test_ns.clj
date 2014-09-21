@@ -4,10 +4,4 @@
   :f)
 
 (defmacro m []
-  :m)
-
-(def not-me nil)
-
-(defprotocol P (p [_]))
-
-(meta #'p)
+  `(list :m))
