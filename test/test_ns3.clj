@@ -4,4 +4,4 @@
   :f3)
 
 (defmacro m3 []
-  :m3)
+  `(list :m3))

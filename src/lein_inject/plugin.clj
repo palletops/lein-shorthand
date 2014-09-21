@@ -9,7 +9,14 @@
 (defn injection-profiles
   [project]
   {:plugin.lein-inject/injections
-   {:injections (injections (:inject-ns project))}})
+   {:injections (vec
+                 (concat
+                  (injections (:inject-ns project))
+                  (injections (:inject-ns-fns project) {})
+                  (injections (:inject-ns-macros project)
+                              {:macro true})
+                  (injections (:inject-ns-protocol-fns project)
+                              {:protocol true})))}})
 
 (defn middleware
   "Middleware to add a profile defining :injections."

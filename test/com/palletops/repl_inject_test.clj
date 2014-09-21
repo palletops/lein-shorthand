@@ -2,33 +2,52 @@
   (:require [com.palletops.repl-inject :refer :all]
             [clojure.test :refer :all]))
 
-(defmacro fred
+(defmacro eager-inject-seq
   []
-  (first (injections {'fred ['test-ns/f 'test-ns/m]})))
+  `(do
+     ~@(injections {'es ['test-ns/f
+                         'test-ns/m]})))
 
-(fred)
-
-(defmacro fred2
+(defmacro lazy-inject-seq
   []
-  (first (injections {'fred2 {'f 'test-ns2/f2
-                              'm 'test-ns2/m2}})))
+  `(do
+     ~@(injections {'ls ['test-ns/f]} {})
+     ~@(injections {'ls ['test-ns/m]} {:macro true})))
 
-(fred2)
+(eager-inject-seq)
+(lazy-inject-seq)
 
-(defmacro fred3
+(defmacro inject-map
   []
-  (first (injections {'fred3 [['f 'test-ns3/f3]
-                              'test-ns3/m3]})))
+  `(do
+     ~@(injections {'inject-map {'f1 'test-ns/f
+                                 'm 'test-ns2/m2}})))
 
-(fred3)
+(inject-map)
+
+(defmacro inject-mixed
+  []
+  `(do
+     ~@(injections {'inject-mixed [['f 'test-ns3/f3]
+                                   'test-ns2/f2
+                                   'test-ns3/m3]})))
+
+(inject-mixed)
 
 (deftest inject-nses-test
   (testing "spec as symbol sequence"
-    (is (= :f (fred/f)))
-    (is (= :m (fred/m))))
+    (testing "eager injection"
+      (is (= :f (es/f)))
+      (is (= '(:m) (es/m))))
+    (testing "lazy injection"
+      (is (= :f (ls/f)) "first invocation")
+      (is (= :f (ls/f)))
+      (is (= '(:m) (ls/m)) "first invocation")
+      (is (= '(:m) (ls/m)))))
   (testing "spec as map"
-    (is (= :f2 (fred2/f)))
-    (is (= :m2 (fred2/m))))
-  (testing "mixed spec"
-    (is (= :f3 (fred3/f)))
-    (is (= :m3 (fred3/m3)))))
+    (is (= :f (inject-map/f1)))
+    (is (= '(:m2) (inject-map/m))))
+  (testing "inject-mixed spec"
+    (is (= :f3 (inject-mixed/f)))
+    (is (= :f2 (inject-mixed/f2)))
+    (is (= '(:m3) (inject-mixed/m3)))))
