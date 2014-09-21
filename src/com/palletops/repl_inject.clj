@@ -9,7 +9,7 @@
      (intern
       ns#
       (with-meta sym# (dissoc (meta v#) :name :ns))
-      @v#)))
+      v#)))
 
 (defn ns-entry
   "Return a function definition that, given a namespace entry as
