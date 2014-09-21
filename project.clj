@@ -1,4 +1,4 @@
-(defproject com.palletops/lein-inject "0.2.0"
+(defproject com.palletops/lein-inject "0.2.1-SNAPSHOT"
   :description "Leiningen plugin to build injected namespaces."
   :url "https://github.com/palletops/lein-inject"
   :license {:name "Eclipse Public License"
