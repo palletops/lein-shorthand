@@ -11,7 +11,8 @@
                            {:arglists '[[& not-yet-loaded]]}
                            meta-m#
                            ;; add meta from var if var available
-                           (meta (resolve v-sym#))))
+                           (meta (resolve v-sym#))
+                           (meta sym#)))
       (fn [& args#]
         (let [v-ns# (symbol (namespace v-sym#))]
           (try
@@ -84,24 +85,25 @@
            ~'inject-var ~(inject-var-fn)
            ns-entry# ~(ns-entry)]
        (try
-         (doseq [[~ns-sym syms#] '~ns-sym-map
+         (doseq [[~ns-sym syms#] (read-string ~(binding [*print-meta* true]
+                                                 (pr-str ns-sym-map)))
                  :let [req-nses# (group-by :var-ns (map ns-entry# syms#))]]
            (in-ns ~ns-sym)
            (doseq [[~req-ns syms#] req-nses#]
              (doseq [{:keys [~'local-sym ~'var-sym]} syms#]
-               ~(if meta-m
-                  `(~lazy-inject-var ~ns-sym ~'local-sym ~'var-sym ~meta-m)
-                  `(do
-                     (try (require ~req-ns)
-                          (catch Exception e#
-                            (binding [*out* *err*]
-                              (println "Problem loading namespace" ~req-ns
-                                       " for injections:" (.getMessage e#)))))
-                     (if-let [v# (resolve ~'var-sym)]
-                       (~'inject-var ~ns-sym ~'local-sym v#)
-                       (binding [*out* *err*]
-                         (println
-                          (str "Failed to inject " (pr-str ~'var-sym))))))))))
+               (if (or ~meta-m (:lazy (meta ~'local-sym)))
+                 (~lazy-inject-var ~ns-sym ~'local-sym ~'var-sym ~meta-m)
+                 (do
+                   (try (require ~req-ns)
+                        (catch Exception e#
+                          (binding [*out* *err*]
+                            (println "Problem loading namespace" ~req-ns
+                                     " for injections:" (.getMessage e#)))))
+                   (if-let [v# (resolve ~'var-sym)]
+                     (~'inject-var ~ns-sym ~'local-sym v#)
+                     (binding [*out* *err*]
+                       (println
+                        (str "Failed to inject " (pr-str ~'var-sym))))))))))
          (finally (in-ns orig-ns#))))))
 
 

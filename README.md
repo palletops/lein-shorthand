@@ -60,6 +60,16 @@ functions, macros and protocol functions.
  the function is defined, you have to explicitly specify which symbols
  are macros.
 
+If you prefer, you can use `:inject-ns` and add metadata to the
+symbols that you wish to inject lazily.
+
+```clj
+```clj
+:inject-ns {. [clojure.pprint/pprint
+               ^:lazy alembic.still/distill
+               ^:lazy ^:macro alembic.still/lein]}
+```
+
 ## Differences with dot-slash
 
 `lein-inject` does not add anything to your classpath.
