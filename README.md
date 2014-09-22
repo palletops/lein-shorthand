@@ -37,7 +37,7 @@ You can also rename symbols:
 
 The `:inject-ns` will eagerly load all the namespaces of vars that you
 inject, which can increase your REPL start-up time, and increase the
-number of naamespaces that are loaded in your REPL but not used in
+number of namespaces that are loaded in your REPL but not used in
 your projects.
 
 You can make the injection happen lazily, on first use, by using the

@@ -8,7 +8,7 @@
 
 - Add Lazy injection of functions and macros
   Eagerly loading all the namespaces of vars that you inject, can increase
-  your REPL start-up time, and increase the number of naamespaces that are
+  your REPL start-up time, and increase the number of namespaces that are
   loaded in your REPL but not used in your projects.
 
   This allows `:inject-ns-fns` and `:inject-ns-macros` to be used to specify
