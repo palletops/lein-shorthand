@@ -64,7 +64,6 @@ If you prefer, you can use `:inject-ns` and add metadata to the
 symbols that you wish to inject lazily.
 
 ```clj
-```clj
 :inject-ns {. [clojure.pprint/pprint
                ^:lazy alembic.still/distill
                ^:lazy ^:macro alembic.still/lein]}
