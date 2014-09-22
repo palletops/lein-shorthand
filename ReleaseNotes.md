@@ -1,3 +1,9 @@
+## 0.3.0
+
+- Use metadata on :inject-ns symbols to lazy inject
+  Use :lazy, and :macro as required, metadata on symbols specified in the
+  :inject-ns project key to specify lazy loading.
+
 ## 0.2.0
 
 - Add Lazy injection of functions and macros

@@ -15,7 +15,7 @@ after writing this.
 Add `lein-inject` to `:plugins`:
 
 ```clj
-:plugins [[com.palletops/lein-inject "0.2.0"]]
+:plugins [[com.palletops/lein-inject "0.3.0"]]
 ```
 
 Configure using the `:inject-ns` key.  For example to define the `.`
@@ -59,6 +59,16 @@ functions, macros and protocol functions.
  tracks the injected var.  Since the source var is not available when
  the function is defined, you have to explicitly specify which symbols
  are macros.
+
+If you prefer, you can use `:inject-ns` and add metadata to the
+symbols that you wish to inject lazily.
+
+```clj
+```clj
+:inject-ns {. [clojure.pprint/pprint
+               ^:lazy alembic.still/distill
+               ^:lazy ^:macro alembic.still/lein]}
+```
 
 ## Differences with dot-slash
 
