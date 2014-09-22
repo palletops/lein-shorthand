@@ -45,6 +45,15 @@ You can make the injection happen lazily, on first use, by using the
 not be required until first use, you have to explicitly use the
 `:inject-ns-macros` key for macros.
 
+If you prefer, you can use `:inject-ns` and add metadata to the
+symbols that you wish to inject lazily.
+
+```clj
+:inject-ns {. [clojure.pprint/pprint
+               ^:lazy alembic.still/distill
+               ^:lazy ^:macro alembic.still/lein]}
+```
+
 ## How it works
 
 `:inject-ns` defines vars in the target namespace that are set to the
@@ -59,15 +68,6 @@ functions, macros and protocol functions.
  tracks the injected var.  Since the source var is not available when
  the function is defined, you have to explicitly specify which symbols
  are macros.
-
-If you prefer, you can use `:inject-ns` and add metadata to the
-symbols that you wish to inject lazily.
-
-```clj
-:inject-ns {. [clojure.pprint/pprint
-               ^:lazy alembic.still/distill
-               ^:lazy ^:macro alembic.still/lein]}
-```
 
 ## Differences with dot-slash
 
