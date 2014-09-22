@@ -1,3 +1,9 @@
+## 0.3.1
+
+- Speed up plugin loading
+  Avoid the `require` on `leiningen.repl`.  This saves about 1.5s on `lein
+  version` when the plugin is active.
+
 ## 0.3.0
 
 - Use metadata on :inject-ns symbols to lazy inject

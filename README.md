@@ -15,7 +15,7 @@ after writing this.
 Add `lein-inject` to `:plugins`:
 
 ```clj
-:plugins [[com.palletops/lein-inject "0.3.0"]]
+:plugins [[com.palletops/lein-inject "0.3.1"]]
 ```
 
 Configure using the `:inject-ns` key.  For example to define the `.`
