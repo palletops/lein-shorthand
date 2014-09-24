@@ -1,5 +1,10 @@
-(ns com.palletops.repl-inject
-  "Namespace injection for use at the repl.")
+(ns com.palletops.shorthand
+  "Create clojure namespaces with short names, so you can easily call
+  utility functions in the REPL using fully qualified symbols.
+
+  Transforms a map of namespace and fully qualified symbols from the
+  project :shorthand key into namespace definitions specified in the
+  project :injections key.")
 
 (defn lazy-inject-var-fn
   "Return a function definition form for lazily injecting a var into a

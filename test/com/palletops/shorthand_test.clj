@@ -1,5 +1,5 @@
-(ns com.palletops.repl-inject-test
-  (:require [com.palletops.repl-inject :refer :all]
+(ns com.palletops.shorthand-test
+  (:require [com.palletops.shorthand :refer :all]
             [clojure.test :refer :all]))
 
 ;; Remove namespaces, so we can test the automated require of the

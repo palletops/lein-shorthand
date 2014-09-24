@@ -1,21 +1,21 @@
-(ns lein-inject.plugin
+(ns lein-shorthand.plugin
   "Plugin to inject namespaces"
   (:require
-   [com.palletops.repl-inject :refer [injections]]
+   [com.palletops.shorthand :refer [injections]]
    [leiningen.core.main :as main]
    [leiningen.core.project :as project]
    [robert.hooke :refer [add-hook]]))
 
 (defn injection-profiles
   [project]
-  {:plugin.lein-inject/injections
+  {:plugin.lein-shorthand/injections
    {:injections (vec
                  (concat
-                  (injections (:inject-ns project))
-                  (injections (:inject-ns-fns project) {})
-                  (injections (:inject-ns-macros project)
+                  (injections (:shorthand project))
+                  (injections (:shorthand-fns project) {})
+                  (injections (:shorthand-macros project)
                               {:macro true})
-                  (injections (:inject-ns-protocol-fns project)
+                  (injections (:shorthand-protocol-fns project)
                               {:protocol true})))}})
 
 (defn middleware
@@ -32,7 +32,7 @@
 (defn repl-hook
   [task & [project & args]]
   (apply task
-         (project/merge-profiles project [:plugin.lein-inject/injections])
+         (project/merge-profiles project [:plugin.lein-shorthand/injections])
          args))
 
 (defn add-repl-hook  []
