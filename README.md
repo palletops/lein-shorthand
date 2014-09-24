@@ -20,14 +20,14 @@ Add `lein-shorthand` to `:plugins` in the `:user` profile of
 ```clj
 {:user
   {…
-   :plugins [[com.palletops/lein-shorthand "0.3.0"]]
+   :plugins [[com.palletops/lein-shorthand "0.4.0"]]
    …}}
 ```
 
 You create shorthand namespaces using the `:shorthand` project key
 (again, in the `:user` profile).  For example to define the `.`
-namespace with clojure's `pprint` and alembic's `still` function and
-`lein` macro:
+namespace with clojure's `pprint` and [alembic][alembic]'s `still`
+function and `lein` macro:
 
 ```clj
 :shorthand {. [clojure.pprint/pprint
@@ -108,3 +108,4 @@ Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
 
 [dot-slash]:https://github.com/gfredericks/dot-slash "Gary Fredericks' dot-slash plugin"
+[alembic]: http://github.com/pallet/alembic "Alembic - add to you REPL classpath and run lein tasks"
