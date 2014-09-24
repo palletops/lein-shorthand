@@ -1,4 +1,4 @@
-(defproject com.palletops/lein-shorthand "0.4.0"
+(defproject com.palletops/lein-shorthand "0.4.1-SNAPSHOT"
   :description
   "A leiningen plugin to create clojure namespaces with short names,
    so you can easily call utility functions in the REPL using fully
