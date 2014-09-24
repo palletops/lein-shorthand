@@ -1,3 +1,15 @@
+## 0.4.0
+
+- Rename project to lein-shorthand
+  Now uses the :shorthand project key for configuration.
+
+- Use create-ns rather than in-ns
+  Simplifies the generated code, removing a try…finally form.
+
+- Remove :shorthand-protocol-fns key
+  This was incorrect, as the :protocol metadata requires the var of the
+  protocol as a value.
+
 ## 0.3.1
 
 - Speed up plugin loading
