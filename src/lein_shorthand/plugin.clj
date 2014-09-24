@@ -14,9 +14,7 @@
                   (injections (:shorthand project))
                   (injections (:shorthand-fns project) {})
                   (injections (:shorthand-macros project)
-                              {:macro true})
-                  (injections (:shorthand-protocol-fns project)
-                              {:protocol true})))}})
+                              {:macro true})))}})
 
 (defn middleware
   "Middleware to add a profile defining :injections."
