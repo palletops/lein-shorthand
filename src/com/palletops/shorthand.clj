@@ -1,5 +1,10 @@
-(ns com.palletops.repl-inject
-  "Namespace injection for use at the repl.")
+(ns com.palletops.shorthand
+  "Create clojure namespaces with short names, so you can easily call
+  utility functions in the REPL using fully qualified symbols.
+
+  Transforms a map of namespace and fully qualified symbols from the
+  project :shorthand key into namespace definitions specified in the
+  project :injections key.")
 
 (defn lazy-inject-var-fn
   "Return a function definition form for lazily injecting a var into a
@@ -80,31 +85,28 @@
         inject-var (gensym "inject-var")
         ns-sym (gensym "ns-sym")
         req-ns (gensym "req-ns")]
-    `(let [orig-ns# (ns-name *ns*)
-           ~lazy-inject-var ~(lazy-inject-var-fn)
+    `(let [~lazy-inject-var ~(lazy-inject-var-fn)
            ~'inject-var ~(inject-var-fn)
            ns-entry# ~(ns-entry)]
-       (try
-         (doseq [[~ns-sym syms#] (read-string ~(binding [*print-meta* true]
-                                                 (pr-str ns-sym-map)))
-                 :let [req-nses# (group-by :var-ns (map ns-entry# syms#))]]
-           (in-ns ~ns-sym)
-           (doseq [[~req-ns syms#] req-nses#]
-             (doseq [{:keys [~'local-sym ~'var-sym]} syms#]
-               (if (or ~meta-m (:lazy (meta ~'local-sym)))
-                 (~lazy-inject-var ~ns-sym ~'local-sym ~'var-sym ~meta-m)
-                 (do
-                   (try (require ~req-ns)
-                        (catch Exception e#
-                          (binding [*out* *err*]
-                            (println "Problem loading namespace" ~req-ns
-                                     " for injections:" (.getMessage e#)))))
-                   (if-let [v# (resolve ~'var-sym)]
-                     (~'inject-var ~ns-sym ~'local-sym v#)
-                     (binding [*out* *err*]
-                       (println
-                        (str "Failed to inject " (pr-str ~'var-sym))))))))))
-         (finally (in-ns orig-ns#))))))
+       (doseq [[~ns-sym syms#] (read-string ~(binding [*print-meta* true]
+                                               (pr-str ns-sym-map)))
+               :let [req-nses# (group-by :var-ns (map ns-entry# syms#))]]
+         (create-ns ~ns-sym)
+         (doseq [[~req-ns syms#] req-nses#]
+           (doseq [{:keys [~'local-sym ~'var-sym]} syms#]
+             (if (or ~meta-m (:lazy (meta ~'local-sym)))
+               (~lazy-inject-var ~ns-sym ~'local-sym ~'var-sym ~meta-m)
+               (do
+                 (try (require ~req-ns)
+                      (catch Exception e#
+                        (binding [*out* *err*]
+                          (println "Problem loading namespace" ~req-ns
+                                   " for injections:" (.getMessage e#)))))
+                 (if-let [v# (resolve ~'var-sym)]
+                   (~'inject-var ~ns-sym ~'local-sym v#)
+                   (binding [*out* *err*]
+                     (println
+                      (str "Failed to inject " (pr-str ~'var-sym)))))))))))))
 
 
 (defn injections
