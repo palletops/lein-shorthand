@@ -10,7 +10,7 @@
   "Return a function definition form for lazily injecting a var into a
   namespace."
   []
-  `(fn var-fn [ns# sym# v-sym# meta-m#]
+  `(fn ~'var-fn [ns# sym# v-sym# meta-m#]
      (intern
       ns# (with-meta sym# (merge
                            {:arglists '[[& not-yet-loaded]]}
