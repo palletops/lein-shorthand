@@ -12,6 +12,9 @@ Fredericks, who also wrote [dot-slash][dot-slash], which I discovered
 after writing this.  Many thanks to Gary for suggesting lein-shorthand
 as the name for this plugin.
 
+The approach has also been generalized to a library at 
+[dot-slash-2](https://github.com/gfredericks/dot-slash-2).
+
 ## Usage
 
 Add `lein-shorthand` to `:plugins` in the `:user` profile of
