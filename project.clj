@@ -1,4 +1,4 @@
-(defproject com.gfredericks/lein-shorthand "0.4.1"
+(defproject com.gfredericks/lein-shorthand "0.4.2-SNAPSHOT"
   :description
   "A leiningen plugin to create clojure namespaces with short names,
    so you can easily call utility functions in the REPL using fully
