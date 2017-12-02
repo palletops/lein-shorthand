@@ -17,6 +17,9 @@ The approach has also been generalized to a library at
 
 ## Usage
 
+**Note that the group-id was changed from `com.palletops`
+to `com.gfredericks` at release `0.4.1`.**
+
 Add `lein-shorthand` to `:plugins` in the `:user` profile of
 `~/.lein/profiles.clj`:
 

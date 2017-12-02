@@ -1,3 +1,8 @@
+## 0.4.1 (2017-12-02)
+
+- **Change maven group-id to `com.gfredericks`**
+- Fixed [clojure 1.9 compatibility](https://github.com/palletops/lein-shorthand/issues/7)
+
 ## 0.4.0
 
 - Rename project to lein-shorthand
