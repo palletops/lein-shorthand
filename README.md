@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/palletops/lein-shorthand.svg?branch=develop)](https://travis-ci.org/palletops/lein-shorthand)
+
 # lein-shorthand
 
 A leiningen plugin to create clojure namespaces with short names, so
