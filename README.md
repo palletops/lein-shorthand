@@ -23,7 +23,7 @@ Add `lein-shorthand` to `:plugins` in the `:user` profile of
 ```clj
 {:user
   {…
-   :plugins [[com.palletops/lein-shorthand "0.4.0"]]
+   :plugins [[com.gfredericks/lein-shorthand "0.4.1"]]
    …}}
 ```
 
