@@ -8,4 +8,5 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :profiles {:provided {:dependencies [[org.clojure/clojure "1.6.0"]
                                        [leiningen "2.5.0"]]}}
+  :deploy-repositories [["releases" :clojars]]
   :eval-in :leiningen)
